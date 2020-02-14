@@ -12,6 +12,8 @@ import TrackCreateScreen from './src/screens/TrackCreateScreen';
 import TrackDetailScreen from './src/screens/TrackDetailScreen';
 import TrackListScreen from './src/screens/TrackListScreen';
 
+import { Provider as AuthProvider } from './src/context/AuthContext';
+
 import { View, Text } from 'react-native'
 
 const switchNavigator = createSwitchNavigator({
@@ -29,12 +31,13 @@ const switchNavigator = createSwitchNavigator({
   })
 })
 
-const App = () => {
+
+const App = createAppContainer(switchNavigator);
+
+export default () => {
   return (
-    <View>
-      <Text>app</Text>
-    </View>
+    <AuthProvider>
+      <App></App>
+    </AuthProvider>
   )
 }
-
-export default createAppContainer(switchNavigator);
