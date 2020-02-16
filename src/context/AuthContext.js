@@ -16,7 +16,7 @@ const reducer = (state, action) => {
       return { ...state, signupError: "" };
     }
     case "signout": {
-      return { token: null, errorMessage: '' };
+      return { token: null, errorMessage: "" };
     }
     default:
       return state;
@@ -49,9 +49,9 @@ const signin = dispatch => async ({ email, password }) => {
 };
 
 const signout = dispatch => async () => {
-  await AsyncStorage.removeItem('token');
-  dispatch({ type: 'signout' });
-  navigate('loginFlow');
+  await AsyncStorage.removeItem("token");
+  dispatch({ type: "signout" });
+  navigate("loginFlow");
 };
 
 const clearErrorMessage = dispatch => () => {
@@ -59,12 +59,12 @@ const clearErrorMessage = dispatch => () => {
 };
 
 const tryLocalSignIn = dispatch => async () => {
-  const token = await AsyncStorage.getItem('token');
+  const token = await AsyncStorage.getItem("token");
   if (token) {
-    dispatch({ type: 'signin', payload: token });
-    navigate('mainFlow');
+    dispatch({ type: "signin", payload: token });
+    navigate("mainFlow");
   } else {
-    navigate('loginFlow');
+    navigate("loginFlow");
   }
 };
 

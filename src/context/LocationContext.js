@@ -2,46 +2,46 @@ import createDataContext from "./createDataContext";
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'add_current_location':
-      return { ...state, currentLocation: action.payload};
-    case 'start_recording':
+    case "add_current_location":
+      return { ...state, currentLocation: action.payload };
+    case "start_recording":
       return { ...state, recording: true };
-    case 'stop_recording':
+    case "stop_recording":
       return { ...state, recording: false };
-    case 'add_location':
+    case "add_location":
       return { ...state, locations: [...state.locations, action.payload] };
-    case 'change_name':
+    case "change_name":
       return { ...state, name: action.payload };
-    case 'reset':
-      return { ...state, name: '', locations: [] };
+    case "reset":
+      return { ...state, name: "", locations: [] };
     default:
       return state;
   }
 };
 
-const changeName = dispatch => (name) => {
-  dispatch({ type: 'change_name', payload: name });
-}
+const changeName = dispatch => name => {
+  dispatch({ type: "change_name", payload: name });
+};
 
 const startRecording = dispatch => () => {
-  dispatch({ type: 'start_recording' });
+  dispatch({ type: "start_recording" });
 };
 const stopRecording = dispatch => () => {
-  dispatch({ type: 'stop_recording' });
+  dispatch({ type: "stop_recording" });
 };
 const addLocation = dispatch => (location, recording) => {
-  dispatch({ type: 'add_current_location', payload: location });
+  dispatch({ type: "add_current_location", payload: location });
   if (recording) {
-    dispatch({ type: 'add_location', payload: location });
+    dispatch({ type: "add_location", payload: location });
   }
 };
 
 const reset = dispatch => () => {
-  dispatch({ type: 'reset' });
-}
+  dispatch({ type: "reset" });
+};
 
 export const { Provider, Context } = createDataContext(
   reducer,
   { startRecording, stopRecording, addLocation, changeName, reset },
-  { name: '', recording: false, locations: [], currentLocation: null }
+  { name: "", recording: false, locations: [], currentLocation: null }
 );
