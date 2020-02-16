@@ -7,11 +7,7 @@ import AuthForm from "../components/AuthForm";
 import NavLink from "../components/NavLink";
 
 const SignUpScreen = () => {
-  const { state, signup, clearErrorMessage , tryLocalSignIn} = useContext(AuthContext);
-
-  useEffect(() => {
-    tryLocalSignIn();
-  }, [])
+  const { state, signup, clearErrorMessage } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>

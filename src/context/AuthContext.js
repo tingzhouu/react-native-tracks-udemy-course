@@ -15,6 +15,9 @@ const reducer = (state, action) => {
     case "clear_error": {
       return { ...state, signupError: "" };
     }
+    case "signout": {
+      return { token: null, errorMessage: '' };
+    }
     default:
       return state;
   }
@@ -45,8 +48,10 @@ const signin = dispatch => async ({ email, password }) => {
   }
 };
 
-const signout = dispatch => {
-  return () => {};
+const signout = dispatch => async () => {
+  await AsyncStorage.removeItem('token');
+  dispatch({ type: 'signout' });
+  navigate('loginFlow');
 };
 
 const clearErrorMessage = dispatch => () => {
@@ -65,6 +70,6 @@ const tryLocalSignIn = dispatch => async () => {
 
 export const { Provider, Context } = createDataContext(
   reducer,
-  { signup, signin, clearErrorMessage, tryLocalSignIn },
+  { signup, signin, clearErrorMessage, tryLocalSignIn, signout },
   { isSignedIn: false, signupError: null }
 );
