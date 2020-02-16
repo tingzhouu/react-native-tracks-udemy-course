@@ -1,14 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Input, Button } from 'react-native-elements';
 import Spacer from './Spacer';
+import { Context as LocationContext } from '../context/LocationContext';
 
 const TrackForm = () => {
+  const {
+    state: { name, recording, locations },
+    startRecording, stopRecording, changeName,
+  } = useContext(LocationContext);
+
+  console.log('locations.length', locations.length);
+
   return <>
     <Spacer>
-      <Input placeholder="Enter Track Name" />
+      <Input value={name} onChangeText={changeName} placeholder="Enter Track Name" />
     </Spacer>
     <Spacer>
-      <Button title="Start Recording" />
+      {recording ? (
+        <Button onPress={stopRecording} title="Stop Recording" />
+      ) : (
+        <Button onPress={startRecording} title="Start Recording" />
+      )}
     </Spacer>
   </>
 }
